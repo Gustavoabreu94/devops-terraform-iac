@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  content: read
+
 jobs:
   run-terraform:
     name: "Run terraform"
@@ -29,7 +33,7 @@ jobs:
         run: terraform init
 
       - name: Run terraform format
-        run: terraform fmt
+        run: terraform fmt -check
 
       - name: Run terraform plan
         run: terraform plan
