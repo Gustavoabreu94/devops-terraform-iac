@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-terraform:
+    name: "Run terraform"
+    run-on: ubutun-latest
+
+    steps:
+      - name: Configure credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ""
+          aws-region: us-east-1
+
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.8.4"
+
+      - name: Run terraform init
+        run: terraform init
+
+      - name: Run terraform format
+        run: terraform fmt
