@@ -18,16 +18,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure credentials
+      - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.ROLE_ASSUME }}
           aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.ROLE_ASSUME }}
 
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ vars.TF_VERSION }}
+
+      - name: AWS CLI Whoami (check credentials)
+        run: aws sts get-caller-identity
 
       - name: Terraform init
         run: terraform init
