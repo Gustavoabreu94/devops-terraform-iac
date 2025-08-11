@@ -12,7 +12,7 @@ permissions:
 jobs:
   run-terraform:
     name: "Run terraform"
-    runs-on: ubutun-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
