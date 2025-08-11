@@ -8,6 +8,5 @@ terraform {
 }
 
 provider "aws" {
-  profile = "api-session-sso"
   region  = "us-east-1"
 }
