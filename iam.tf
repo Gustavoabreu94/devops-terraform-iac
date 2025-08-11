@@ -60,7 +60,7 @@ resource "aws_iam_role" "tf-role" {
           ]
           Effect   = "Allow"
           Resource = "*"
-        }]
+      }]
     })
   }
 
