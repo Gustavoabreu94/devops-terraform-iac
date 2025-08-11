@@ -8,22 +8,31 @@ on:
 jobs:
   run-terraform:
     name: "Run terraform"
-    run-on: ubutun-latest
+    runs-on: ubutun-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Configure credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ""
+          role-to-assume: arn:aws:iam::491085418849:role/tf-role
           aws-region: us-east-1
 
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: "1.8.4"
+          terraform_version: 1.8.4
 
       - name: Run terraform init
         run: terraform init
 
       - name: Run terraform format
         run: terraform fmt
+
+      - name: Run terraform plan
+        run: terraform plan
+
+      - name: Run terraform apply
+        run: terraform apply -auto-approve
